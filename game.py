@@ -3,6 +3,8 @@ from nltk.corpus import wordnet as WN
 
 import string
 
+
+
 # use wordnet and Synsets to figure out
 # commands the user is typing
 def main():
@@ -12,6 +14,7 @@ def main():
 	intro = """ Will you survive? HINT: Probably not... """
 
 	while (not atEnd):
+		
 		command = raw_input("What will you do? : ")
 
 		# strip out all punctuation REALLY fast
