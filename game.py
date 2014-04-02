@@ -9,12 +9,19 @@ import string
 # commands the user is typing
 def main():
 
+	with open("story.txt", 'r') as story_file:
+		story = story_file.read()
+
+	story = [s.strip() for s in story.splitlines()]
+
+	# populate tree here
+
 	atEnd = False
 
 	intro = """ Will you survive? HINT: Probably not... """
 
 	while (not atEnd):
-		
+
 		command = raw_input("What will you do? : ")
 
 		# strip out all punctuation REALLY fast
