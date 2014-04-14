@@ -20,6 +20,8 @@ def main():
 
 	intro = """ Will you survive? HINT: Probably not... """
 
+	print intro 
+	
 	while (not atEnd):
 
 		command = raw_input("What will you do? : ")
@@ -36,9 +38,12 @@ def main():
 		for word in command.lower().split():
 			if not commandDict.has_key(word):
 				synsets = WN.synsets(word)
+				
+				# print synsets
 
 				if len(synsets) > 0:
 					commandDict[word] = WN.synsets(word)
+
 
 		# once we get Thesaurus, want to get 
 		# directions from the synsets
