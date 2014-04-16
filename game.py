@@ -102,38 +102,46 @@ def main():
 			# Creates a Thesaurus of words in the command string
 			# ------- takes a long time -------
 			for word in command.lower().split():
+				hasDirection = False
 
-				# check to see if command contains an explicit direction
-				if word in DIRECTIONS.keys():
-					directionToMove = word
+				for direct in DIRECTIONS.keys():
+					if word in DIRECTIONS[direct]:
+						directionToMove = word
+						hasDirection = True
+
+				if hasDirection:
 					break
+				# # check to see if command contains an explicit direction
+				# if word in DIRECTIONS.keys():
+				# 	directionToMove = word
+				# 	break
 
 				# check if word in dictionary
-				if not commandDict.has_key(word):
+				# if not commandDict.has_key(word):
 
 					# generate synsets for the next word in the command
-					synsets = WN.synsets(word)
+					# synsets = WN.synsets(word)
 					
-					# get the lemmas for the Synsets generated
-					for lemma in synsets:
+					# # get the lemmas for the Synsets generated
+					# for lemma in synsets:
 						
-						# iterate through DIRECTIONS
-						for direction in DIRECTIONS.keys():
+					# 	# iterate through DIRECTIONS
+					# 	for direction in DIRECTIONS.keys():
 
-							for synonym in DIRECTIONS[direction]:
-								# check if direction in DIRECTIONS matches a word in
-								# the generated lemmas
-								if synonym in lemma.lemma_names:
+					# 		for synonym in DIRECTIONS[direction]:
+					# 			# check if direction in DIRECTIONS matches a word in
+					# 			# the generated lemmas
+					# 			if synonym in lemma.lemma_names:
 
-									# if it does, then it's a direction and that's the direction
-									# the user wants to go
-									directionToMove = direction
-									break
+					# 				# if it does, then it's a direction and that's the direction
+					# 				# the user wants to go
+					# 				directionToMove = direction
+					# 				break
 
 					# insert the synsets of the word if synsets exist
 					# for that word
-					if len(synsets) > 0:
-						commandDict[word] = WN.synsets(word)
+					# if len(synsets) > 0:
+					# 	commandDict[word] = WN.synsets(word)
 
 
 			# once we get Thesaurus, want to get 
