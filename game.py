@@ -22,6 +22,25 @@ def check_tree(node):
 			print "\nDIRECTION: "+child
 			check_tree(node.directions[child])
 
+# generates all of the synonyms for the 4 directions
+# in our DIRECTIONS dictionary
+def generate_direction_thesaurus():
+
+	# for each directions
+	for direction in DIRECTIONS.keys():
+
+		# get synset of the directions
+		syns = WN.synsets(direction)
+
+		# for all of the synsets of that direction
+		for syn in syns:
+
+			# append the results to the previous array value in the dictionary
+			DIRECTIONS[direction] = DIRECTIONS[direction] + syn.lemma_names
+
+		# get rid of duplicates
+		DIRECTIONS[direction] = list(set(DIRECTIONS[direction]))
+
 # use wordnet and Synsets to figure out
 # commands the user is typing
 def main():
@@ -41,6 +60,10 @@ def main():
 	# FOR TESTING PURPOSES
 	# check_tree(game_tree.root)
 
+	generate_direction_thesaurus()
+
+	for dire in DIRECTIONS.keys():
+		print DIRECTIONS[dire]
 
 	atEnd = False
 
