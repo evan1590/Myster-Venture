@@ -3,7 +3,18 @@ from nltk.corpus import wordnet as WN
 
 import string
 
+from story_tree import *
 
+# preorder traversal to check the contents of
+# the tree
+def check_tree(node):
+
+	if node:
+		print node.cargo
+
+		for child in node.directions.keys():
+			print "\nDIRECTION: "+child
+			check_tree(node.directions[child])
 
 # use wordnet and Synsets to figure out
 # commands the user is typing
@@ -14,7 +25,13 @@ def main():
 
 	story = [s.strip() for s in story.splitlines()]
 
+	game_tree = StoryTree()
 	# populate tree here
+	for step in story:
+		game_tree.insert(step)
+
+	check_tree(game_tree.root)
+
 
 	atEnd = False
 

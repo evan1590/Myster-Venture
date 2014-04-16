@@ -17,7 +17,7 @@ class StoryTree(object):
 		self.root = None # set root as nothing to begin with
 	
 	def insert(self, string):
-		if not root: # if no root...
+		if not self.root: # if no root...
 			self.root = Node(string) # set first string in story file to be root
 		else:
 			current = self.root
@@ -28,7 +28,7 @@ class StoryTree(object):
 			story = string[colon+1:] # get the actual story
 
 			while current: # loop while still on a node
-				if is_empty(current.directions): # check if dictionary of directions is empty
+				if len(current.directions) == 0: # check if dictionary of directions is empty
 
 					# if it is, add the direction and the appropriate story
 					# branching from it to the tree and end insertion
