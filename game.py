@@ -62,9 +62,6 @@ def main():
 
 	generate_direction_thesaurus()
 
-	for dire in DIRECTIONS.keys():
-		print DIRECTIONS[dire]
-
 	atEnd = False
 
 	intro = """ Will you survive? HINT: Probably not... """
