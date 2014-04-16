@@ -44,5 +44,8 @@ class StoryTree(object):
 					# set new current to be the next story bit
 					current = current.directions[next_direction]
 
-	def step_next(self, direction):
-		pass
+	def step_next(self,node,direction):
+		if node.directions[direction.upper()]:
+			return node.directions[direction.upper()]
+		else:
+			return "YOU HAVE DIED A HORRIBLE DEATH."
