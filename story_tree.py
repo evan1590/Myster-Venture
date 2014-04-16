@@ -45,9 +45,12 @@ class StoryTree(object):
 					current = current.directions[next_direction]
 
 	def step_next(self,node,direction):
+		# checks to see if it is a vaild direction (input)
 		if node.directions.has_key(direction.upper()):
+			# if it is a vaild input then return the next node
 			return node.directions[direction.upper()]
 		else:
+			# else you have been killed 
 			return "YOU HAVE DIED A HORRIBLE DEATH, AND NO ONE WILL REMEMBER YOU!"
 		
 			
