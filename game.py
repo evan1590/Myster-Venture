@@ -5,7 +5,11 @@ import string
 
 from story_tree import *
 
-DIRECTIONS = ['right', 'left', 'straight', 'back']
+DIRECTIONS = {'right':['right'],
+			  'left':['left'], 
+			  'straight':['straight', 'forward'], 
+			  'back':['back', 'backwards']
+			  }
 
 # preorder traversal to check the contents of
 # the tree. TESTING ONLY
@@ -76,6 +80,11 @@ def main():
 			# ------- takes a long time -------
 			for word in command.lower().split():
 
+				# check to see if command contains an explicit direction
+				if word in DIRECTIONS.keys():
+					directionToMove = word
+					break
+
 				# check if word in dictionary
 				if not commandDict.has_key(word):
 
@@ -84,18 +93,19 @@ def main():
 					
 					# get the lemmas for the Synsets generated
 					for lemma in synsets:
-
+						
 						# iterate through DIRECTIONS
-						for direction in DIRECTIONS:
+						for direction in DIRECTIONS.keys():
 
-							# check if direction in DIRECTIONS matches a word in
-							# the generated lemmas
-							if direction in synsets[0].lemma_names:
+							for synonym in DIRECTIONS[direction]:
+								# check if direction in DIRECTIONS matches a word in
+								# the generated lemmas
+								if synonym in lemma.lemma_names:
 
-								# if it does, then it's a direction and that's the direction
-								# the user wants to go
-								directionToMove = direction
-								break
+									# if it does, then it's a direction and that's the direction
+									# the user wants to go
+									directionToMove = direction
+									break
 
 					# insert the synsets of the word if synsets exist
 					# for that word
