@@ -6,21 +6,21 @@ import string
 from story_tree import *
 
 CAMPUS = {
-			'A': ['B','C'] # Young
-			'B': ['C','D','E'] # Clark
+			'A': ['B','C']         # Young
+			'B': ['C','D','E']     # Clark
 			'C': ['A','B','D','N'] # Meadows
-			'D': ['B','C','E'] # Chase
-			'E': ['D','F'] # Meneely/Watson Courtyard
-			'F': ['M','G'] # Mary Lyon
-			'G': ['H','I','J'] # Dimple
-			'H': ['G'] # Emerson Dining
-			'I': ['G'] # Chapel
-			'J': ['K','L','G'] # Library
-			'K': ['L','J'] # New SC
-			'L': ['K','J'] # Old SC
-			'M': ['F','G'] # Park Hall
-			'N': ['K','J','C'] # Power Plant
-			'O': [] # WHALE
+			'D': ['B','C','E']     # Chase
+			'E': ['D','F']         # Meneely/Watson Courtyard
+			'F': ['M','G']         # Mary Lyon
+			'G': ['H','I','J']     # Dimple
+			'H': ['G']             # Emerson Dining
+			'I': ['G']             # Chapel
+			'J': ['K','L','G']     # Library
+			'K': ['L','J']         # New SC
+			'L': ['K','J']         # Old SC
+			'M': ['F','G']         # Park Hall
+			'N': ['K','J','C']     # Power Plant
+			'O': []                # WHALE
 		 }
 
 DIRECTIONS = {'right':['right'],
