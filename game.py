@@ -111,41 +111,6 @@ def main():
 
 				if hasDirection:
 					break
-				# # check to see if command contains an explicit direction
-				# if word in DIRECTIONS.keys():
-				# 	directionToMove = word
-				# 	break
-
-				# check if word in dictionary
-				# if not commandDict.has_key(word):
-
-					# generate synsets for the next word in the command
-					# synsets = WN.synsets(word)
-					
-					# # get the lemmas for the Synsets generated
-					# for lemma in synsets:
-						
-					# 	# iterate through DIRECTIONS
-					# 	for direction in DIRECTIONS.keys():
-
-					# 		for synonym in DIRECTIONS[direction]:
-					# 			# check if direction in DIRECTIONS matches a word in
-					# 			# the generated lemmas
-					# 			if synonym in lemma.lemma_names:
-
-					# 				# if it does, then it's a direction and that's the direction
-					# 				# the user wants to go
-					# 				directionToMove = direction
-					# 				break
-
-					# insert the synsets of the word if synsets exist
-					# for that word
-					# if len(synsets) > 0:
-					# 	commandDict[word] = WN.synsets(word)
-
-
-			# once we get Thesaurus, want to get 
-			# directions from the synsets
 
 			# move down the tree
 			currentNode = game_tree.step_next(currentNode, directionToMove)
