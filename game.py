@@ -58,10 +58,10 @@ def populate_graph():
 	# graph where appropriate
 	os.chdir('stories/')
 	directoryContents = os.listdir('./') # get titles of the text files
-	print directoryContents
+	# print directoryContents
 
 	for f in directoryContents:
-		print f
+		# print f
 		with open(f, 'r') as story_file:
 			story = story_file.read()
 
@@ -109,7 +109,7 @@ def main():
 
 	while (not atEnd):
 
-		print currentNode
+		# print currentNode
 
 		print CAMPUS[currentNode][0]
 		print
@@ -117,42 +117,48 @@ def main():
 		if CAMPUS[currentNode] == []:
 			atEnd = True
 		else:
+			validDirection = False
 
-			command = raw_input("What will you do? : ")
+			while (not validDirection):
+				command = raw_input("What will you do? : ")
 
-			print
+				print
 
-			# strip out all punctuation REALLY fast
-			# translate() uses raw string operations in C 
-			# using a lookup table 
-			command = command.translate(string.maketrans("",""), string.punctuation)
+				# strip out all punctuation REALLY fast
+				# translate() uses raw string operations in C 
+				# using a lookup table 
+				command = command.translate(string.maketrans("",""), string.punctuation)
 
-			# keeps track of each word of the command and
-			# all of their respective Synsets
-			# commandDict = {}
+				# keeps track of each word of the command and
+				# all of their respective Synsets
+				# commandDict = {}
 
-			# direction user will move
-			directionToMove = ""
+				# direction user will move
+				directionToMove = ""
+			
+				# Creates a Thesaurus of words in the command string
+				# ------- takes a long time -------
+				for word in command.lower().split():
+					hasDirection = False
 
-			# Creates a Thesaurus of words in the command string
-			# ------- takes a long time -------
-			for word in command.lower().split():
-				hasDirection = False
+					for direct in DIRECTIONS.keys():
+						if word in DIRECTIONS[direct]:
+							directionToMove = direct
+							hasDirection = True
+							validDirection = True
 
-				for direct in DIRECTIONS.keys():
-					if word in DIRECTIONS[direct]:
-						directionToMove = direct
-						hasDirection = True
+					if hasDirection:
+						break
 
-				if hasDirection:
-					break
+				if not validDirection:
+					print "Please enter a valid direction to move in (either LEFT, RIGHT, STRAIGHT, or BACK)"
 
 			# traverse the graph
 			for direct in range(len(DIRECTION_KEY)):
 				if directionToMove == DIRECTION_KEY[direct]:
 					currentNode = CAMPUS[currentNode][1][direct]
 
-			if currentNode == 0:
+			if currentNode == 0 or currentNode == 'E':
 				print "YOU HAVE DIED"
 				atEnd = True
 
