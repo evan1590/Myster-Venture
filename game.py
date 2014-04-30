@@ -32,16 +32,26 @@ DIRECTIONS = {'right':['right'],
 			  'back':['back', 'backwards']
 			  }
 
+# print graph node by node
+# TESTING ONLY
+def print_graph():
+	i = 0
+	for node in CAMPUS.keys():
+		print "NODE: "+str(i)
+		print CAMPUS[node][0]
+		print
+		i += 1
+
 # preorder traversal to check the contents of
 # the tree. TESTING ONLY
-def check_tree(node):
+# def check_tree(node):
 
-	if node:
-		print node.cargo
+# 	if node:
+# 		print node.cargo
 
-		for child in node.directions.keys():
-			print "\nDIRECTION: "+child
-			check_tree(node.directions[child])
+# 		for child in node.directions.keys():
+# 			print "\nDIRECTION: "+child
+# 			check_tree(node.directions[child])
 
 def populate_graph():
 	# loop through each line and insert into
@@ -85,27 +95,7 @@ def generate_direction_thesaurus():
 # commands the user is typing
 def main():
 
-	# with open("story.txt", 'r') as story_file:
-	# 	story = story_file.read()
-
-	# story = [s.strip() for s in story.splitlines()]
-
-	# game_tree = StoryTree()
-
-	# # populate tree here
-	# for step in story:
-	# 	game_tree.insert(step)
-
 	populate_graph()
-	i = 0
-	for node in CAMPUS.keys():
-		print "NODE: "+str(i)
-		print CAMPUS[node][0]
-		print
-		i += 1
-	# prints out the tree's content
-	# FOR TESTING PURPOSES
-	# check_tree(game_tree.root)
 
 	generate_direction_thesaurus()
 
@@ -127,14 +117,6 @@ def main():
 		if CAMPUS[currentNode] == []:
 			atEnd = True
 		else:
-
-			# if isinstance(currentNode, str):
-			# 	print currentNode
-			# 	atEnd = True
-
-			# else:
-			# 	print currentNode.cargo
-			# 	print
 
 			command = raw_input("What will you do? : ")
 
@@ -170,6 +152,9 @@ def main():
 				if directionToMove == DIRECTION_KEY[direct]:
 					currentNode = CAMPUS[currentNode][1][direct]
 
+			if currentNode == 0:
+				print "YOU HAVE DIED"
+				atEnd = True
 
 if __name__ == '__main__':
 	main()
