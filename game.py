@@ -1,18 +1,23 @@
 import nltk
 from nltk.corpus import wordnet as WN
 
+import random
 import string
 import os
 
 from story_tree import *
 
+INVENTORY = {
+				'weapons': []
+			}
+
 DIRECTION_KEY = ['right', 'left', 'straight', 'back', 'explore']
 
 CAMPUS = {
-			'A': ["", [0, 'C', 'B', 0]],         # Young
-			'B': ["", [0,'D','E', 0]],     # Clark
-			'C': ["", ['D', 0,'N','A']], # Meadows
-			'D': ["", ['B','C','E', 0, 1], 
+			'A': ["", [0, {'C': 'meadows'}, {'B': 'clark'}, 0, 0]],         # Young
+			'B': ["", [0, {'D': 'chase'}, {'E': 'meneely'}, 0, 0]],     # Clark
+			'C': ["", [{'D': 'chase'}, 0, {'N': 'power plant'}, {'A': 'young'}, 0]], # Meadows
+			'D': ["", [{'B': 'clark'}, {'C': 'meadows'}, {'E': 'meneely'}, 0, 1], 
 			     [
 			        "Rancid Food", 
 			        "Thursday's chicken turned into Saturday's chicken salad", 
@@ -21,16 +26,16 @@ CAMPUS = {
 			        "Cooking utensils"
 			     ]
 			     ],     # Chase
-			'E': ["", [0, 0, 'G', 'D']],         # Meneely/Watson Courtyard
+			'E': ["", [0, 0, {'G': 'dimple'}, {'D': 'chase'}, 0]],         # Meneely/Watson Courtyard
 			#'F': ("", ['M','G']),         # Mary Lyon
-			'G': ["", [0,'I','J', 'E']],     # Dimple
+			'G': ["", [0, {'I': 'chapel'}, {'J': 'library'}, {'E': 'meneely'}, 0]],     # Dimple
 			#'H': ("", ['G']),             # Emerson Dining
-			'I': ["", [0, 0, 0, 0]],             # Chapel
-			'J': ["", [0, 0, 'K','G']],     # Library
-			'K': ["", ['O', 0, 0, 'J']],         # New SC
+			'I': ["", [0, 0, 0, 0, 0]],             # Chapel
+			'J': ["", [0, 0, {'K': 'library'}, {'G': 'dimple'}, 0]],     # Library
+			'K': ["", [{'O': 'whale'}, 0, 0, {'J': 'library'}, 0]],         # New SC
 			#'L': ("", ['K','J']),         # Old SC
 			#'M': ("", ['F','G']),         # Park Hall
-			'N': ["", ['J','K', 0, 0, 1], 
+			'N': ["", [{'J': 'library'}, {'K': 'new sc'}, 0, 0, 1], 
 				 [
 				 	"Chainsaw",
 				 	"Screwdriver",
@@ -157,13 +162,28 @@ def main():
 			# traverse the graph
 			for direct in range(len(DIRECTION_KEY)):
 				if directionToMove == DIRECTION_KEY[direct]:
-					currentNode = CAMPUS[currentNode][1][direct]
+
+					# if type in 'explore' and can explore
+					if directionToMove == 'explore' and CAMPUS[currentNode][1][direct] == 1:
+						
+						# randomly choose a weapon or object
+						objects = CAMPUS[currentNode][2]
+						weapon = random.choice(objects)
+						INVENTORY['weapons'].append(weapon)
+
+						print "You just found a " + weapon
+
+					else:
+						currentNode = CAMPUS[currentNode][1][direct]
 
 			if currentNode == 0 or (currentNode == 'E' or currentNode == 'I'):
 				if currentNode != 0:
 					print CAMPUS[currentNode][0]
 				print "YOU HAVE DIED"
 				atEnd = True
+			else:
+				# get the node to go to next
+				currentNode = currentNode.keys()[0]
 
 if __name__ == '__main__':
 	main()
