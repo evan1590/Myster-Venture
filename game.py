@@ -31,7 +31,7 @@ CAMPUS = {
 			'G': ["", [0, {'I': 'chapel'}, {'J': 'library'}, {'E': 'meneely'}, 0]],     # Dimple
 			#'H': ("", ['G']),             # Emerson Dining
 			'I': ["", [0, 0, 0, 0, 0]],             # Chapel
-			'J': ["", [0, 0, {'K': 'library'}, {'G': 'dimple'}, 0]],     # Library
+			'J': ["", [0, 0, {'K': 'new sc'}, {'G': 'dimple'}, 0]],     # Library
 			'K': ["", [{'O': 'whale'}, 0, 0, {'J': 'library'}, 0]],         # New SC
 			#'L': ("", ['K','J']),         # Old SC
 			#'M': ("", ['F','G']),         # Park Hall
@@ -172,7 +172,7 @@ def main():
 						break
 
 				if not validDirection:
-					print "Please enter a valid direction to move in (either LEFT, RIGHT, STRAIGHT, BACK or EXPLORE)"
+					print "Please enter a valid command (either LEFT, RIGHT, STRAIGHT, BACK, EXPLORE, or a LOCATION)"
 
 			# traverse the graph
 			for direct in range(len(DIRECTION_KEY)):
@@ -187,6 +187,7 @@ def main():
 						INVENTORY['weapons'].append(weapon)
 
 						print "You just found a " + weapon
+						break
 
 					else:
 						currentNode = CAMPUS[currentNode][1][direct]
@@ -199,9 +200,12 @@ def main():
 				atEnd = True
 
 			else:
-
+				# print currentNode
+				if isinstance(currentNode, str):
+					currentNode = currentNode
 				# get the node to go to next
-				currentNode = currentNode.keys()[0]
+				else:
+					currentNode = currentNode.keys()[0]
 
 if __name__ == '__main__':
 	main()
