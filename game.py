@@ -19,10 +19,10 @@ CAMPUS = {
 			#'H': ("", ['G']),             # Emerson Dining
 			'I': ["", [0, 0, 0, 0]],             # Chapel
 			'J': ["", [0, 0, 'K','G']],     # Library
-			'K': ["", [0, 0, 0, 'J']],         # New SC
+			'K': ["", ['O', 0, 0, 'J']],         # New SC
 			#'L': ("", ['K','J']),         # Old SC
 			#'M': ("", ['F','G']),         # Park Hall
-			'N': ["", ['J','k', 0, 0]],     # Power Plant
+			'N': ["", ['J','K', 0, 0]],     # Power Plant
 			'O': ["", []]                 # WHALE
 		 }
 
@@ -114,8 +114,9 @@ def main():
 		print CAMPUS[currentNode][0]
 		print
 
-		if CAMPUS[currentNode] == []:
+		if CAMPUS[currentNode][1] == []:
 			atEnd = True
+
 		else:
 			validDirection = False
 
@@ -158,7 +159,9 @@ def main():
 				if directionToMove == DIRECTION_KEY[direct]:
 					currentNode = CAMPUS[currentNode][1][direct]
 
-			if currentNode == 0 or currentNode == 'E':
+			if currentNode == 0 or (currentNode == 'E' or currentNode == 'I'):
+				if currentNode != 0:
+					print CAMPUS[currentNode][0]
 				print "YOU HAVE DIED"
 				atEnd = True
 
