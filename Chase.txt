@@ -1,0 +1,3 @@
+Chase.txt
+
+D:Standing outside of Chase you find yourself thinking it might be good to get some food. You think about entering but you notice that you forgot your WID and decide to walk away. Where would you like to go to Meadows, the courtyard infront of Meneely or to Clark?

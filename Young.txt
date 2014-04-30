@@ -1,0 +1,4 @@
+Young.txt
+
+A:You wake up in Young basement and rub your eyes to rid you of your temporary blindness (due to Chase food). The lights are flickering overhead and you smell an awful smell. You know it isn't the Chase food anymore, but smells like flesh (close enough?). You hear rattling to your right. A door is slightly ajar in front of you, and you see a staircase to your left.
+STRAIGHT:You willingly walk up the stairs and the lights go out behind you and the rattling stops. There's a door in front of you and you go through. You look around and no one is in sight. The lamps are flickering and it's beginning to rain and the wind is picking up. You see Public Safety cars abandoned with broken windows on the Young lawn. You see a few room lights on in Meadows straight ahead and you notice the door to Clark is being held open by a broken branch to your right.
