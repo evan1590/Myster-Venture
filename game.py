@@ -6,13 +6,21 @@ import os
 
 from story_tree import *
 
-DIRECTION_KEY = ['right', 'left', 'straight', 'back']
+DIRECTION_KEY = ['right', 'left', 'straight', 'back', 'explore']
 
 CAMPUS = {
 			'A': ["", [0, 'C', 'B', 0]],         # Young
 			'B': ["", [0,'D','E', 0]],     # Clark
 			'C': ["", ['D', 0,'N','A']], # Meadows
-			'D': ["", ['B','C','E', 0]],     # Chase
+			'D': ["", ['B','C','E', 0, 1], 
+			     [
+			        "Rancid Food", 
+			        "Thursday's chicken turned into Saturday's chicken salad", 
+			        "Mark's pots and pans", 
+			        "Maria", 
+			        "Cooking utensils"
+			     ]
+			     ],     # Chase
 			'E': ["", [0, 0, 'G', 'D']],         # Meneely/Watson Courtyard
 			#'F': ("", ['M','G']),         # Mary Lyon
 			'G': ["", [0,'I','J', 'E']],     # Dimple
@@ -22,14 +30,25 @@ CAMPUS = {
 			'K': ["", ['O', 0, 0, 'J']],         # New SC
 			#'L': ("", ['K','J']),         # Old SC
 			#'M': ("", ['F','G']),         # Park Hall
-			'N': ["", ['J','K', 0, 0]],     # Power Plant
+			'N': ["", ['J','K', 0, 0, 1], 
+				 [
+				 	"Chainsaw",
+				 	"Screwdriver",
+				 	"Keys",
+				 	"Empty toolbox",
+				 	"Gas",
+				 	"Trashbags"
+				 ]
+				 ],     # Power Plant
 			'O': ["", []]                 # WHALE
 		 }
 
-DIRECTIONS = {'right':['right'],
-			  'left':['left'], 
-			  'straight':['straight', 'forward'], 
-			  'back':['back', 'backwards']
+DIRECTIONS = {
+			  'right': ['right'],
+			  'left': ['left'], 
+			  'straight': ['straight', 'forward'], 
+			  'back': ['back', 'backwards'],
+			  'explore': ['explore', 'look around']
 			  }
 
 # print graph node by node
@@ -42,26 +61,15 @@ def print_graph():
 		print
 		i += 1
 
-# preorder traversal to check the contents of
-# the tree. TESTING ONLY
-# def check_tree(node):
-
-# 	if node:
-# 		print node.cargo
-
-# 		for child in node.directions.keys():
-# 			print "\nDIRECTION: "+child
-# 			check_tree(node.directions[child])
-
 def populate_graph():
+
 	# loop through each line and insert into
 	# graph where appropriate
 	os.chdir('stories/')
 	directoryContents = os.listdir('./') # get titles of the text files
-	# print directoryContents
 
 	for f in directoryContents:
-		# print f
+		
 		with open(f, 'r') as story_file:
 			story = story_file.read()
 
@@ -109,8 +117,6 @@ def main():
 
 	while (not atEnd):
 
-		# print currentNode
-
 		print CAMPUS[currentNode][0]
 		print
 
@@ -130,15 +136,9 @@ def main():
 				# using a lookup table 
 				command = command.translate(string.maketrans("",""), string.punctuation)
 
-				# keeps track of each word of the command and
-				# all of their respective Synsets
-				# commandDict = {}
-
 				# direction user will move
 				directionToMove = ""
 			
-				# Creates a Thesaurus of words in the command string
-				# ------- takes a long time -------
 				for word in command.lower().split():
 					hasDirection = False
 
