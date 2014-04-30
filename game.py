@@ -12,14 +12,14 @@ CAMPUS = {
 			'C': ("", ['A','B','D','N']), # Meadows
 			'D': ("", ['B','C','E']),     # Chase
 			'E': ("", ['D','F']),         # Meneely/Watson Courtyard
-			'F': ("", ['M','G']),         # Mary Lyon
+			#'F': ("", ['M','G']),         # Mary Lyon
 			'G': ("", ['H','I','J']),     # Dimple
-			'H': ("", ['G']),             # Emerson Dining
+			#'H': ("", ['G']),             # Emerson Dining
 			'I': ("", ['G']),             # Chapel
 			'J': ("", ['K','L','G']),     # Library
 			'K': ("", ['L','J']),         # New SC
-			'L': ("", ['K','J']),         # Old SC
-			'M': ("", ['F','G']),         # Park Hall
+			#'L': ("", ['K','J']),         # Old SC
+			#'M': ("", ['F','G']),         # Park Hall
 			'N': ("", ['K','J','C']),     # Power Plant
 			'O': ("", [])                 # WHALE
 		 }
@@ -51,12 +51,12 @@ def populate_graph():
 		with open(f, 'r') as story_file:
 			story = story_file.read()
 
-		# parse out direction from beginning of paragraph
-		colon = story.find(':') # gets position of colon
-		node = story[:colon] # get direction that bit of the story happens in
-		story = story[colon+1:] # get the actual story
+			# parse out direction from beginning of paragraph
+			colon = story.find(':') # gets position of colon
+			node = story[:colon] # get direction that bit of the story happens in
+			story = story[colon+1:] # get the actual story
 
-		CAMPUS[node] = story
+			CAMPUS[node] = story
 
 # generates all of the synonyms for the 4 directions
 # in our DIRECTIONS dictionary
