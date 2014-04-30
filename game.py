@@ -2,6 +2,7 @@ import nltk
 from nltk.corpus import wordnet as WN
 
 import string
+import os
 
 from story_tree import *
 
@@ -43,7 +44,19 @@ def check_tree(node):
 def populate_graph():
 	# loop through each line and insert into
 	# graph where appropriate
-	pass
+	os.chdir('stories/')
+	directoryContents = os.listdir('./') # get titles of the text files
+
+	for f in directoryContents:
+		with open(f, 'r') as story_file:
+			story = story_file.read()
+
+		# parse out direction from beginning of paragraph
+		colon = story.find(':') # gets position of colon
+		node = story[:colon] # get direction that bit of the story happens in
+		story = story[colon+1:] # get the actual story
+
+		CAMPUS[node] = story
 
 # generates all of the synonyms for the 4 directions
 # in our DIRECTIONS dictionary
