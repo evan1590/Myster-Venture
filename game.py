@@ -147,17 +147,32 @@ def main():
 				for word in command.lower().split():
 					hasDirection = False
 
+					# loop through the keys of the possible directions dictionary
 					for direct in DIRECTIONS.keys():
 						if word in DIRECTIONS[direct]:
 							directionToMove = direct
 							hasDirection = True
 							validDirection = True
 
+						else:	
+							directionCounter = 0
+							for el in CAMPUS[currentNode][1]:
+								if isinstance(el, dict):
+									
+									node = el.keys()[0]
+									if word == el[node]: # check if word is value of node letter
+										directionToMove = DIRECTION_KEY[directionCounter]
+										hasDirection = True
+										validDirection = True
+										break 
+
+								directionCounter += 1
+
 					if hasDirection:
 						break
 
 				if not validDirection:
-					print "Please enter a valid direction to move in (either LEFT, RIGHT, STRAIGHT, or BACK)"
+					print "Please enter a valid direction to move in (either LEFT, RIGHT, STRAIGHT, BACK or EXPLORE)"
 
 			# traverse the graph
 			for direct in range(len(DIRECTION_KEY)):
@@ -177,11 +192,14 @@ def main():
 						currentNode = CAMPUS[currentNode][1][direct]
 
 			if currentNode == 0 or (currentNode == 'E' or currentNode == 'I'):
+
 				if currentNode != 0:
 					print CAMPUS[currentNode][0]
 				print "YOU HAVE DIED"
 				atEnd = True
+
 			else:
+
 				# get the node to go to next
 				currentNode = currentNode.keys()[0]
 
