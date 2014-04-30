@@ -1,1 +1,1 @@
-D:Standing outside of Chase you find yourself thinking it might be good to get some food. Where would you like to go? EXPLORE Chase, Meadows is to your LEFT, the courtyard infront of Meneely is STRAIGHT ahead, and Clark is to your RIGHT
+D:Standing outside of Chase you find yourself thinking it might be good to get some food. Where would you like to go? EXPLORE Chase, Meadows is to your LEFT, the courtyard in front of Meneely is STRAIGHT ahead, and Clark is to your RIGHT
