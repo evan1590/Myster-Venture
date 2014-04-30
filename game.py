@@ -6,22 +6,24 @@ import os
 
 from story_tree import *
 
+DIRECTION_KEY = ['right', 'left', 'straight', 'back']
+
 CAMPUS = {
-			'A': ("", ['B','C']),         # Young
-			'B': ("", ['C','D','E']),     # Clark
-			'C': ("", ['A','B','D','N']), # Meadows
-			'D': ("", ['B','C','E']),     # Chase
-			'E': ("", ['D','F']),         # Meneely/Watson Courtyard
+			'A': ["", [0, 'C', 'B', 0]],         # Young
+			'B': ["", ['C','D','E']],     # Clark
+			'C': ["", ['A','B','D','N']], # Meadows
+			'D': ["", ['B','C','E']],     # Chase
+			'E': ["", ['D','F']],         # Meneely/Watson Courtyard
 			#'F': ("", ['M','G']),         # Mary Lyon
-			'G': ("", ['H','I','J']),     # Dimple
+			'G': ["", ['H','I','J']],     # Dimple
 			#'H': ("", ['G']),             # Emerson Dining
-			'I': ("", ['G']),             # Chapel
-			'J': ("", ['K','L','G']),     # Library
-			'K': ("", ['L','J']),         # New SC
+			'I': ["", ['G']],             # Chapel
+			'J': ["", ['K','L','G']],     # Library
+			'K': ["", ['L','J']],         # New SC
 			#'L': ("", ['K','J']),         # Old SC
 			#'M': ("", ['F','G']),         # Park Hall
-			'N': ("", ['K','J','C']),     # Power Plant
-			'O': ("", [])                 # WHALE
+			'N': ["", ['K','J','C']],     # Power Plant
+			'O': ["", []]                 # WHALE
 		 }
 
 DIRECTIONS = {'right':['right'],
@@ -46,8 +48,10 @@ def populate_graph():
 	# graph where appropriate
 	os.chdir('stories/')
 	directoryContents = os.listdir('./') # get titles of the text files
+	print directoryContents
 
 	for f in directoryContents:
+		print f
 		with open(f, 'r') as story_file:
 			story = story_file.read()
 
@@ -56,7 +60,7 @@ def populate_graph():
 			node = story[:colon] # get direction that bit of the story happens in
 			story = story[colon+1:] # get the actual story
 
-			CAMPUS[node] = story
+			CAMPUS[node][0] = story
 
 # generates all of the synonyms for the 4 directions
 # in our DIRECTIONS dictionary
@@ -81,17 +85,24 @@ def generate_direction_thesaurus():
 # commands the user is typing
 def main():
 
-	with open("story.txt", 'r') as story_file:
-		story = story_file.read()
+	# with open("story.txt", 'r') as story_file:
+	# 	story = story_file.read()
 
-	story = [s.strip() for s in story.splitlines()]
+	# story = [s.strip() for s in story.splitlines()]
 
-	game_tree = StoryTree()
+	# game_tree = StoryTree()
 
-	# populate tree here
-	for step in story:
-		game_tree.insert(step)
+	# # populate tree here
+	# for step in story:
+	# 	game_tree.insert(step)
 
+	populate_graph()
+	i = 0
+	for node in CAMPUS.keys():
+		print "NODE: "+str(i)
+		print CAMPUS[node][0]
+		print
+		i += 1
 	# prints out the tree's content
 	# FOR TESTING PURPOSES
 	# check_tree(game_tree.root)
@@ -104,17 +115,26 @@ def main():
 
 	print intro 
 	
-	currentNode = game_tree.root
+	currentNode = 'A'
 
 	while (not atEnd):
 
-		if isinstance(currentNode, str):
-			print currentNode
-			atEnd = True
+		print currentNode
 
+		print CAMPUS[currentNode][0]
+		print
+
+		if CAMPUS[currentNode] == []:
+			atEnd = True
 		else:
-			print currentNode.cargo
-			print
+
+			# if isinstance(currentNode, str):
+			# 	print currentNode
+			# 	atEnd = True
+
+			# else:
+			# 	print currentNode.cargo
+			# 	print
 
 			command = raw_input("What will you do? : ")
 
@@ -127,7 +147,7 @@ def main():
 
 			# keeps track of each word of the command and
 			# all of their respective Synsets
-			commandDict = {}
+			# commandDict = {}
 
 			# direction user will move
 			directionToMove = ""
@@ -139,14 +159,17 @@ def main():
 
 				for direct in DIRECTIONS.keys():
 					if word in DIRECTIONS[direct]:
-						directionToMove = word
+						directionToMove = direct
 						hasDirection = True
 
 				if hasDirection:
 					break
 
-			# move down the tree
-			currentNode = game_tree.step_next(currentNode, directionToMove)
+			# traverse the graph
+			for direct in range(len(DIRECTION_KEY)):
+				if directionToMove == DIRECTION_KEY[direct]:
+					currentNode = CAMPUS[currentNode][1][direct]
+
 
 if __name__ == '__main__':
 	main()
