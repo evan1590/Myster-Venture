@@ -10,19 +10,19 @@ DIRECTION_KEY = ['right', 'left', 'straight', 'back']
 
 CAMPUS = {
 			'A': ["", [0, 'C', 'B', 0]],         # Young
-			'B': ["", ['C','D','E']],     # Clark
-			'C': ["", ['A','B','D','N']], # Meadows
-			'D': ["", ['B','C','E']],     # Chase
-			'E': ["", ['D','F']],         # Meneely/Watson Courtyard
+			'B': ["", [0,'D','E', 0]],     # Clark
+			'C': ["", ['D', 0,'N','A']], # Meadows
+			'D': ["", ['B','C','E', 0]],     # Chase
+			'E': ["", [0, 0, 'G', 'D']],         # Meneely/Watson Courtyard
 			#'F': ("", ['M','G']),         # Mary Lyon
-			'G': ["", ['H','I','J']],     # Dimple
+			'G': ["", [0,'I','J', 'E']],     # Dimple
 			#'H': ("", ['G']),             # Emerson Dining
-			'I': ["", ['G']],             # Chapel
-			'J': ["", ['K','L','G']],     # Library
-			'K': ["", ['L','J']],         # New SC
+			'I': ["", [0, 0, 0, 0]],             # Chapel
+			'J': ["", [0, 0, 'K','G']],     # Library
+			'K': ["", [0, 0, 0, 'J']],         # New SC
 			#'L': ("", ['K','J']),         # Old SC
 			#'M': ("", ['F','G']),         # Park Hall
-			'N': ["", ['K','J','C']],     # Power Plant
+			'N': ["", ['J','k', 0, 0]],     # Power Plant
 			'O': ["", []]                 # WHALE
 		 }
 
